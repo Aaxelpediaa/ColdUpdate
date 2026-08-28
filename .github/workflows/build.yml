@@ -1,0 +1,48 @@
+name: Build and publish level bundles
+
+on:
+  push:
+    branches: [main, master]
+    paths: ["raw/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pycryptodome
+
+      - name: Build a bundle for every variant/version under raw/
+        run: |
+          for cv_dir in raw/*/*/; do
+            variant="$(basename "$(dirname "$cv_dir")")"
+            cv="$(basename "$cv_dir")"
+            echo "::group::$variant/$cv"
+
+            hash="$(python fetch_real_hash.py "$cv" | sed -n 's/^hash: //p')"
+            if [ -z "$hash" ]; then
+              echo "no real hash for $cv right now -- skipping (the game isn't asking for a bundle at this version)"
+              echo "::endgroup::"
+              continue
+            fi
+
+            python main.py "$cv" "$cv_dir" "dist/$variant/hotupdate/ad/level_shipping/$cv" --hash "$hash"
+            echo "::endgroup::"
+          done
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          keep_files: true
