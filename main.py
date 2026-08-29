@@ -2,7 +2,7 @@
 Packs plaintext level JSON into a real level_shipping bundle -- see README.md
 for the format and how --hash gets used.
 
-Usage: python main.py <cv> [src_dir] [out_dir] [--hash <hash>]
+Usage: python main.py <cv> <src_dir> <out_dir> [--hash <hash>]
 """
 import gzip
 import hashlib
@@ -60,7 +60,6 @@ def build_bundle(cv: str, src_dir: Path, out_dir: Path, override_hash: str | Non
     print(f"\nbundle hash: {bundle_hash}")
     print(f"wrote: {out_dir / (bundle_hash + '.txt')}")
     print(f"wrote: {out_dir / (bundle_hash + '_md5.txt')}")
-    print(f"\nserved at hotupdate/ad/level_shipping/{cv}/{bundle_hash}(.txt|_md5.txt)")
 
 
 if __name__ == "__main__":
@@ -68,13 +67,9 @@ if __name__ == "__main__":
 
     ap = argparse.ArgumentParser()
     ap.add_argument("cv", help="client version tag, e.g. 4.2.1")
-    ap.add_argument("src_dir", nargs="?", help="default: raw/<cv>/")
-    ap.add_argument("out_dir", nargs="?", help="default: dist/hotupdate/ad/level_shipping/<cv>/")
+    ap.add_argument("src_dir", help="e.g. raw/<variant>/<ad|ios>/<cv>/")
+    ap.add_argument("out_dir", help="e.g. dist/<variant>/hotupdate/<ad|ios>/level_shipping/<cv>/")
     ap.add_argument("--hash", help="publish under this filename instead of one computed here")
     args = ap.parse_args()
 
-    root = Path(__file__).resolve().parent
-    src = Path(args.src_dir) if args.src_dir else root / "raw" / args.cv
-    out = Path(args.out_dir) if args.out_dir else root / "dist" / "hotupdate" / "ad" / "level_shipping" / args.cv
-
-    build_bundle(args.cv, src, out, override_hash=args.hash)
+    build_bundle(args.cv, Path(args.src_dir), Path(args.out_dir), override_hash=args.hash)

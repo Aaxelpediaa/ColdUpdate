@@ -22,21 +22,23 @@ jobs:
       - name: Install dependencies
         run: pip install pycryptodome
 
-      - name: Build a bundle for every variant/version under raw/
+      - name: Build a bundle for every variant/platform/version under raw/
         run: |
-          for cv_dir in raw/*/*/; do
-            variant="$(basename "$(dirname "$cv_dir")")"
+          for cv_dir in raw/*/*/*/; do
+            platform_dir="$(dirname "$cv_dir")"
+            variant="$(basename "$(dirname "$platform_dir")")"
+            platform="$(basename "$platform_dir")"
             cv="$(basename "$cv_dir")"
-            echo "::group::$variant/$cv"
+            echo "::group::$variant/$platform/$cv"
 
-            hash="$(python fetch_real_hash.py "$cv" | sed -n 's/^hash: //p')"
+            hash="$(python fetch_real_hash.py "$cv" --platform "$platform" | sed -n 's/^hash:[[:space:]]*//p')"
             if [ -z "$hash" ]; then
-              echo "no real hash for $cv right now -- skipping (the game isn't asking for a bundle at this version)"
+              echo "no real hash for $cv ($platform) right now -- skipping (the game isn't asking for a bundle at this version)"
               echo "::endgroup::"
               continue
             fi
 
-            python main.py "$cv" "$cv_dir" "dist/$variant/hotupdate/ad/level_shipping/$cv" --hash "$hash"
+            python main.py "$cv" "$cv_dir" "dist/$variant/hotupdate/$platform/level_shipping/$cv" --hash "$hash"
             echo "::endgroup::"
           done
 

@@ -4,7 +4,11 @@ a given version -- that hash is the only filename a replacement bundle can
 be published under. Builds the request itself; no capture needed, since
 the request body is just {"cv": "<cv>", "t": "0"}.
 
-Usage: python fetch_real_hash.py [cv]
+Android and iOS ask two different hosts and get back paths under two
+different folders (hotupdate/ad/... vs hotupdate/ios/...) -- otherwise
+identical. --platform picks which one to ask.
+
+Usage: python fetch_real_hash.py [cv] [--platform ad|ios]
 Requires pycryptodome (`pip install pycryptodome`).
 """
 import hashlib
@@ -17,7 +21,10 @@ from base64 import b64decode, b64encode
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 
-REAL_URL = "http://cloudpvz2android.ditwan.cn/index.php"
+REAL_HOSTS = {
+    "ad":  "http://cloudpvz2android.ditwan.cn/index.php",
+    "ios": "http://cloudpvz2ios.ditwan.cn/index.php",
+}
 MSG_ID = "V1270"
 FALLBACK_KEY = "1geh6fvq4r20M02s"
 EV = "3"
@@ -48,7 +55,7 @@ def e_decrypt(e_field: str, msg_id: str = MSG_ID) -> bytes | None:
         return None
 
 
-def send(e: str, ev: str = EV) -> str:
+def send(e: str, platform: str, ev: str = EV) -> str:
     boundary = "_{{}}_"
     parts = {"req": MSG_ID, "e": e, "ev": ev}
     body = "".join(
@@ -57,7 +64,7 @@ def send(e: str, ev: str = EV) -> str:
     ) + f"--{boundary}--\r\n"
 
     req = urllib.request.Request(
-        REAL_URL,
+        REAL_HOSTS[platform],
         data=body.encode(),
         headers={
             "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 14)",
@@ -75,10 +82,17 @@ def send(e: str, ev: str = EV) -> str:
 
 
 def main() -> None:
-    cv = sys.argv[1] if len(sys.argv) > 1 else "4.2.0"
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("cv", nargs="?", default="4.2.0")
+    ap.add_argument("--platform", choices=("ad", "ios"), default="ad")
+    args = ap.parse_args()
+    cv, platform = args.cv, args.platform
+
     e = e_encrypt(json.dumps({"cv": cv, "t": "0"}).encode())
 
-    resp = json.loads(send(e))
+    resp = json.loads(send(e, platform))
     if "e" not in resp:
         sys.exit(f"no \"e\" in the response -- server said: {resp}")
 
@@ -91,16 +105,19 @@ def main() -> None:
 
     if not lp:
         print(f"decrypted: {plaintext.decode()}")
-        print(f"\nno bundle currently served (lp is empty) for {cv}.")
+        print(f"\nno bundle currently served (lp is empty) for {cv} ({platform}).")
         return
 
-    m = re.match(r"^hotupdate/ad/level_shipping/([^/]+)/([0-9a-f]+)$", lp)
+    m = re.match(r"^hotupdate/(ad|ios)/level_shipping/([^/]+)/([0-9a-f]+)$", lp)
     if not m:
         sys.exit(f"decrypted, but lp doesn't look like a level_shipping path: {lp}")
 
-    print(f"cv:   {m.group(1)}")
-    print(f"hash: {m.group(2)}")
-    print(f"\nnext: python main.py {m.group(1)} raw/{m.group(1)} --hash {m.group(2)}")
+    platform, cv, real_hash = m.group(1), m.group(2), m.group(3)
+    print(f"platform: {platform}")
+    print(f"cv:       {cv}")
+    print(f"hash:     {real_hash}")
+    print(f"\nnext: python main.py {cv} raw/<variant>/{platform}/{cv} "
+          f"dist/<variant>/hotupdate/{platform}/level_shipping/{cv} --hash {real_hash}")
 
 
 if __name__ == "__main__":
