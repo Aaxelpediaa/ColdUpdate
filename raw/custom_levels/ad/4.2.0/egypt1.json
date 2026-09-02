@@ -1,1 +1,333 @@
-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
+{
+	"objects": [
+		{
+			"objclass": "LevelDefinition",
+			"objdata": {
+				"Description": "[PLAYERS_TRIP_TO_EGYPT]",
+				"LevelNumber": 1,
+				"Loot": "RTID(DefaultLoot@LevelModules)",
+				"Modules": [
+					"RTID(StandardIntro@LevelModules)",
+					"RTID(DefaultSunDropper@LevelModules)",
+					"RTID(ZombiesDeadWinCon@LevelModules)",
+					"RTID(SeedBank@CurrentLevel)",
+					"RTID(DefaultZombieWinCondition@LevelModules)",
+					"RTID(NewWaves@CurrentLevel)",
+					"RTID(DefaultCustomLevel@LevelModules)"
+				],
+				"MusicType": "MainPath",
+				"Name": "自定义僵尸示例",
+				"StageModule": "RTID(EgyptStage@LevelModules)",
+				"VictoryModule": "RTID(VictoryOutro@LevelModules)",
+				"DisablePeavine": true,
+				"StartingSun": 200,
+				"ShowZombies": [
+					"roman_healer"
+				]
+			}
+		},
+		{
+			"aliases": [
+				"SeedBank"
+			],
+			"objclass": "SeedBankProperties",
+			"objdata": {
+				"PresetPlantList": [],
+				"PlantWhiteList": [],
+				"PlantBlackList": [],
+				"SelectionMethod": "chooser",
+				"GlobalLevel": 5,
+				"OverrideSeedSlotsCount": 9
+			}
+		},
+		{
+			"aliases": [
+				"NewWaves"
+			],
+			"objclass": "WaveManagerModuleProperties",
+			"objdata": {
+				"DynamicZombies": [
+					{
+						"PointIncrementPerWave": 40,
+						"StartingPoints": 200,
+						"StartingWave": 3,
+						"ZombiePool": [
+							"RTID(tutorial@ZombieTypes)",
+							"RTID(tutorial_armor1@ZombieTypes)",
+							"RTID(tutorial_armor2@ZombieTypes)"
+						]
+					}
+				],
+				"WaveManagerProps": "RTID(WaveManagerProps@CurrentLevel)"
+			}
+		},
+		{
+			"aliases": [
+				"WaveManagerProps"
+			],
+			"objclass": "WaveManagerProperties",
+			"objdata": {
+				"FlagWaveInterval": 5,
+				"MaxNextWaveHealthPercentage": 0.85,
+				"MinNextWaveHealthPercentage": 0.7,
+				"WaveCount": 5,
+				"Waves": [
+					[
+						"RTID(Wave1Jittered0@CurrentLevel)",
+						"RTID(CustomZombieEvent@CurrentLevel)"
+					],
+					[
+						"RTID(Wave2Jittered0@CurrentLevel)"
+					],
+					[
+						"RTID(Wave3Jittered0@CurrentLevel)"
+					],
+					[
+						"RTID(Wave4Jittered0@CurrentLevel)",
+						"RTID(CustomZombieEvent@CurrentLevel)"
+					],
+					[
+						"RTID(Wave5Jittered0@CurrentLevel)"
+					]
+				],
+				"ZombieCountDownFirstWaveConveyorSecs": 5,
+				"ZombieCountDownFirstWaveSecs": 12,
+				"ZombieCountDownHugeWaveDelay": 5
+			}
+		},
+		{
+			"aliases": [
+				"Wave1Jittered0"
+			],
+			"objclass": "SpawnZombiesJitteredWaveActionProps",
+			"objdata": {
+				"AdditionalPlantfood": 0,
+				"Zombies": [
+					{
+						"Type": "RTID(tutorial@ZombieTypes)"
+					}
+				]
+			}
+		},
+		{
+			"aliases": [
+				"Wave2Jittered0"
+			],
+			"objclass": "SpawnZombiesJitteredWaveActionProps",
+			"objdata": {
+				"Zombies": [
+					{
+						"Type": "RTID(tutorial@ZombieTypes)"
+					},
+					{
+						"Type": "RTID(tutorial@ZombieTypes)"
+					}
+				]
+			}
+		},
+		{
+			"aliases": [
+				"Wave3Jittered0"
+			],
+			"objclass": "SpawnZombiesJitteredWaveActionProps",
+			"objdata": {
+				"AdditionalPlantfood": 1,
+				"Zombies": [
+					{
+						"Type": "RTID(tutorial_armor1@ZombieTypes)"
+					},
+					{
+						"Type": "RTID(tutorial@ZombieTypes)"
+					}
+				]
+			}
+		},
+		{
+			"aliases": [
+				"Wave4Jittered0"
+			],
+			"objclass": "SpawnZombiesJitteredWaveActionProps",
+			"objdata": {
+				"Zombies": [
+					{
+						"Row": "2",
+						"Type": "RTID(tutorial@ZombieTypes)"
+					},
+					{
+						"Row": "5",
+						"Type": "RTID(tutorial_armor1@ZombieTypes)"
+					}
+				]
+			}
+		},
+		{
+			"aliases": [
+				"Wave5Jittered0"
+			],
+			"objclass": "SpawnZombiesJitteredWaveActionProps",
+			"objdata": {
+				"AdditionalPlantfood": 0,
+				"Zombies": [
+					{
+						"Row": "5",
+						"Type": "RTID(tutorial@ZombieTypes)"
+					},
+					{
+						"Row": "4",
+						"Type": "RTID(tutorial_armor1@ZombieTypes)"
+					},
+					{
+						"Row": "2",
+						"Type": "RTID(tutorial_armor1@ZombieTypes)"
+					},
+					{
+						"Row": "1",
+						"Type": "RTID(tutorial@ZombieTypes)"
+					}
+				]
+			}
+		},
+		{
+			"aliases": [
+				"CustomZombieEvent"
+			],
+			"objclass": "SpawnZombiesFromGroundSpawnerProps",
+			"objdata": {
+				"ColumnStart": 6,
+				"ColumnEnd": 9,
+				"Zombies": [
+					{
+						"Type": "RTID(roman_healer_1@CurrentLevel)",
+						"Row": 3
+					}
+				]
+			}
+		},
+		{
+			"aliases": [
+				"roman_healer_1_props"
+			],
+			"objclass": "ZombieRomanHealerProps",
+			"objdata": {
+				"Actions": [
+					"RTID(ZombieRomanHealerHeal@ZombieActions)"
+				],
+				"GridItemToDrop": "RTID(artifact_silverkey_gate@GridItemTypes)",
+				"BreaksStaff": {
+					"List": [
+						"pumpkin",
+						"powervine"
+					],
+					"ListType": "whitelist"
+				},
+				"ArtCenter": {
+					"x": 90,
+					"y": 125
+				},
+				"AlmanacOffset": {
+					"x": -20,
+					"y": 0
+				},
+				"AttackRect": {
+					"mHeight": 95,
+					"mWidth": 20,
+					"mX": 15,
+					"mY": 0
+				},
+				"CanSpawnPlantFood": true,
+				"Cost": 200,
+				"EatDPS": 100,
+				"GroundTrackName": "ground_swatch",
+				"HitRect": {
+					"mHeight": 95,
+					"mWidth": 32,
+					"mX": 10,
+					"mY": 10
+				},
+				"Hitpoints": 555,
+				"ScaledProps": [
+					{
+						"Arg1": 1.3,
+						"Arg2": 0.05,
+						"Formula": "standard",
+						"Key": "Hitpoints"
+					},
+					{
+						"Arg1": 1.3,
+						"Arg2": 0.05,
+						"Formula": "standard",
+						"Key": "EatDPS"
+					},
+					{
+						"Formula": "constant",
+						"Key": "Speed"
+					},
+					{
+						"Formula": "constant",
+						"Key": "WavePointCost"
+					}
+				],
+				"ShadowOffset": {
+					"x": 10,
+					"y": 0,
+					"z": 1.2
+				},
+				"Speed": 0.12,
+				"WavePointCost": 700,
+				"Weight": 3500,
+				"ZombieLevelStats": [
+					{
+						"AttackLevel": 1,
+						"HitPointsLevel": 1
+					},
+					{
+						"AttackLevel": 2,
+						"HitPointsLevel": 2
+					},
+					{
+						"AttackLevel": 3,
+						"HitPointsLevel": 3
+					},
+					{
+						"AttackLevel": 4.5,
+						"HitPointsLevel": 4.5
+					},
+					{
+						"AttackLevel": 5,
+						"HitPointsLevel": 5
+					}
+				],
+				"ZombieStats": [
+					{
+						"Type": "toughness",
+						"Value": "toughness4"
+					},
+					{
+						"Type": "speed",
+						"Value": "speed0"
+					}
+				]
+			}
+		},
+		{
+			"aliases": [
+				"roman_healer_1"
+			],
+			"objclass": "ZombieType",
+			"objdata": {
+				"TypeName": "roman_healer",
+				"ZombieClass": "ZombieRomanHealer",
+				"Properties": "RTID(roman_healer_1_props@CurrentLevel)",
+				"ResourceGroups": [
+					"ZombieRomanHealerGroup"
+				],
+				"AudioGroups": [],
+				"AnimRigClass": "ZombieAnimRig_RomanHealer",
+				"PopAnim": "POPANIM_ZOMBIE_ZOMBIE_ROMAN_HEALER",
+				"HomeWorld": "rift149",
+				"AlmanacBackdropName": "warp"
+			}
+		}
+	],
+	"version": 1
+}
